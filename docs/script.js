@@ -2,9 +2,15 @@ const GOOGLE_SCRIPT_URL = "";
 const weddingDate = new Date("2026-09-07T09:00:00+05:30").getTime();
 
 document.getElementById("open-invitation").addEventListener("click", () => {
-  document.getElementById("opening-screen").classList.add("is-open");
-  document.getElementById("site").classList.add("site-visible");
-  setTimeout(() => document.getElementById("home").scrollIntoView(), 500);
+  const openingScreen = document.getElementById("opening-screen");
+  const button = document.getElementById("open-invitation");
+  button.disabled = true;
+  openingScreen.classList.add("is-opening");
+  setTimeout(() => {
+    openingScreen.classList.add("is-open");
+    document.getElementById("site").classList.add("site-visible");
+  }, 2100);
+  setTimeout(() => document.getElementById("home").scrollIntoView(), 2500);
 });
 
 function updateCountdown() {

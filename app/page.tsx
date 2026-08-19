@@ -14,6 +14,7 @@ function CoupleArt({ className = "" }: { className?: string }) {
 
 export default function Home() {
   const [opened, setOpened] = useState(false);
+  const [opening, setOpening] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "setup">("idle");
   const [message, setMessage] = useState("");
   const [remaining, setRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -38,13 +39,31 @@ export default function Home() {
 
   return (
     <>
-      <div className={`opening-screen ${opened ? "is-open" : ""}`} aria-hidden={opened}>
-        <CoupleArt className="opening-art" />
-        <div className="opening-shade" />
-        <div className="opening-content">
-          <p className="micro-label">We invite you to attend our wedding</p>
-          <h1><span>Shehan</span><i>&amp;</i><span>Gayathri</span></h1>
-          <button onClick={() => { setOpened(true); window.setTimeout(() => document.getElementById("home")?.scrollIntoView(), 500); }}><span>✉</span> Open invitation</button>
+      <div className={`opening-screen ${opening ? "is-opening" : ""} ${opened ? "is-open" : ""}`} aria-hidden={opened}>
+        <div className="envelope-scene">
+          <p className="envelope-intro">A celebration of love</p>
+          <div className="envelope">
+            <div className="envelope-back" />
+            <div className="envelope-card">
+              <span className="card-ornament">❦</span>
+              <p>Together with their families</p>
+              <h1>Shehan <i>&amp;</i> Gayathri</h1>
+              <strong>07 · 09 · 2026</strong>
+            </div>
+            <div className="envelope-pocket" />
+            <div className="envelope-flap" />
+            <button
+              className="wax-seal"
+              aria-label="Open Shehan and Gayathri's wedding invitation"
+              disabled={opening}
+              onClick={() => {
+                setOpening(true);
+                window.setTimeout(() => setOpened(true), 2100);
+                window.setTimeout(() => document.getElementById("home")?.scrollIntoView(), 2500);
+              }}
+            ><span>S <i>&amp;</i> G</span></button>
+          </div>
+          <p className="seal-hint">Touch the seal to open</p>
         </div>
       </div>
 
