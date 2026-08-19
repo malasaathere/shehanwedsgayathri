@@ -1,17 +1,30 @@
 const GOOGLE_SCRIPT_URL = "";
 const weddingDate = new Date("2026-09-07T09:00:00+05:30").getTime();
 
-document.getElementById("open-invitation").addEventListener("click", () => {
+let openingStarted = false;
+function openInvitation() {
+  if (openingStarted) return;
+  openingStarted = true;
   const openingScreen = document.getElementById("opening-screen");
   const button = document.getElementById("open-invitation");
+  window.scrollTo(0, 0);
   button.disabled = true;
   openingScreen.classList.add("is-opening");
+  document.getElementById("site").classList.add("site-revealing");
   setTimeout(() => {
     openingScreen.classList.add("is-open");
     document.getElementById("site").classList.add("site-visible");
-  }, 2100);
-  setTimeout(() => document.getElementById("home").scrollIntoView(), 2500);
-});
+    document.body.classList.remove("invitation-locked");
+  }, 2700);
+  setTimeout(() => document.getElementById("home").scrollIntoView(), 3050);
+}
+
+document.getElementById("open-invitation").addEventListener("click", openInvitation);
+window.addEventListener("wheel", (event) => { if (event.deltaY > 3) openInvitation(); }, { passive: true });
+let touchY = 0;
+window.addEventListener("touchstart", (event) => { touchY = event.touches[0]?.clientY || 0; }, { passive: true });
+window.addEventListener("touchmove", (event) => { if (touchY - (event.touches[0]?.clientY || touchY) > 22) openInvitation(); }, { passive: true });
+window.addEventListener("keydown", (event) => { if (["ArrowDown", "PageDown", " "].includes(event.key)) openInvitation(); });
 
 function updateCountdown() {
   const delta = Math.max(0, weddingDate - Date.now());

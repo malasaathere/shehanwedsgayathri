@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 
 const weddingDate = new Date("2026-09-07T09:00:00+05:30").getTime();
 
@@ -18,6 +18,16 @@ export default function Home() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "setup">("idle");
   const [message, setMessage] = useState("");
   const [remaining, setRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const openingStarted = useRef(false);
+
+  const beginOpening = useCallback(() => {
+    if (openingStarted.current) return;
+    openingStarted.current = true;
+    window.scrollTo({ top: 0 });
+    setOpening(true);
+    window.setTimeout(() => setOpened(true), 2700);
+    window.setTimeout(() => document.getElementById("home")?.scrollIntoView(), 3050);
+  }, []);
 
   useEffect(() => {
     const update = () => {
@@ -26,6 +36,24 @@ export default function Home() {
     };
     update(); const timer = window.setInterval(update, 1000); return () => window.clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    let touchY = 0;
+    const onWheel = (event: WheelEvent) => { if (event.deltaY > 3) beginOpening(); };
+    const onTouchStart = (event: TouchEvent) => { touchY = event.touches[0]?.clientY ?? 0; };
+    const onTouchMove = (event: TouchEvent) => { if (touchY - (event.touches[0]?.clientY ?? touchY) > 22) beginOpening(); };
+    const onKeyDown = (event: KeyboardEvent) => { if (["ArrowDown", "PageDown", " "].includes(event.key)) beginOpening(); };
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [beginOpening]);
 
   async function submitRsvp(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setStatus("sending"); setMessage(""); const form = event.currentTarget;
@@ -40,11 +68,14 @@ export default function Home() {
   return (
     <>
       <div className={`opening-screen ${opening ? "is-opening" : ""} ${opened ? "is-open" : ""}`} aria-hidden={opened}>
+        <div className="opening-petals" aria-hidden="true"><i /><i /><i /><i /><i /><i /></div>
         <div className="envelope-scene">
           <p className="envelope-intro">A celebration of love</p>
           <div className="envelope">
+            <div className="envelope-glow" />
             <div className="envelope-back" />
             <div className="envelope-card">
+              <span className="card-crest">S <i>&amp;</i> G</span>
               <span className="card-ornament">❦</span>
               <p>Together with their families</p>
               <h1>Shehan <i>&amp;</i> Gayathri</h1>
@@ -56,18 +87,14 @@ export default function Home() {
               className="wax-seal"
               aria-label="Open Shehan and Gayathri's wedding invitation"
               disabled={opening}
-              onClick={() => {
-                setOpening(true);
-                window.setTimeout(() => setOpened(true), 2100);
-                window.setTimeout(() => document.getElementById("home")?.scrollIntoView(), 2500);
-              }}
+              onClick={beginOpening}
             ><span>S <i>&amp;</i> G</span></button>
           </div>
-          <p className="seal-hint">Touch the seal to open</p>
+          <p className="seal-hint"><span>Scroll to open</span><i aria-hidden="true" /></p>
         </div>
       </div>
 
-      <main className={`wedding-site ${opened ? "site-visible" : ""}`}>
+      <main className={`wedding-site ${opening ? "site-revealing" : ""} ${opened ? "site-visible" : ""}`}>
         <nav aria-label="Wedding navigation">
           <a href="#story">Our story</a><a href="#nakath">Nakath</a><a className="monogram" href="#home">S <i>&amp;</i> G</a><a href="#venue">Venue</a><a href="#rsvp">RSVP</a>
         </nav>
@@ -109,11 +136,10 @@ export default function Home() {
         <section className="timeline-section" id="nakath">
           <p className="section-kicker">Auspicious moments</p><h2>Wedding Day <em>Nakath</em></h2>
           <div className="timeline">
-            <article><time>09:00</time><span /><div><h3>Auspicious Welcome</h3><p>The families welcome the bride and groom</p></div></article>
-            <article><time>10:00</time><span /><div><h3>Poruwa Ceremony</h3><p>Traditional blessings and sacred rituals</p></div></article>
-            <article><time>11:30</time><span /><div><h3>Exchange of Rings</h3><p>A promise of love and togetherness</p></div></article>
-            <article><time>12:30</time><span /><div><h3>Wedding Reception</h3><p>Celebratory meal with family and friends</p></div></article>
-            <article><time>04:30</time><span /><div><h3>Homegoing Nakath</h3><p>The newlyweds begin their journey together</p></div></article>
+            <article><time>09:00 <small>AM</small></time><span /><div><h3>Guests Arrive</h3><p>A warm welcome to our family and friends</p></div></article>
+            <article><time>10:06 <small>AM</small></time><span /><div><h3>Engagement Ceremony</h3><p>The couple exchanges rings and promises</p></div></article>
+            <article><time>10:26 <small>AM</small></time><span /><div><h3>Poruwa Ceremony</h3><p>Traditional blessings and sacred rituals</p></div></article>
+            <article><time>04:02 <small>PM</small></time><span /><div><h3>Couple’s Departure</h3><p>The newlyweds begin their journey together</p></div></article>
           </div>
         </section>
 
