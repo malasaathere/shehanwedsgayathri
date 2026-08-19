@@ -18,3 +18,23 @@ section{position:relative}.section-kicker{margin:0;color:#927178;font-size:.61re
 .countdown-section{padding:72px 22px 60px;color:#fff;text-align:center;background:linear-gradient(#310713dc,#310713dc),url('./couple-portrait.png') center 35%/cover}.countdown-section .section-kicker{color:#e8b3b8}.countdown-section h2{margin:8px 0 30px;font-family:'Great Vibes',cursive;font-size:3.4rem;font-weight:400}.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.countdown div{padding:16px 3px;border:1px solid #ffffff32;border-radius:10px;background:#ffffff0b;backdrop-filter:blur(5px)}.countdown strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:500}.countdown span{font-size:.48rem;letter-spacing:.1em;text-transform:uppercase}.countdown-section blockquote{margin:38px auto 25px;font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;line-height:1.6}.final-date{font-size:.65rem;letter-spacing:.25em}
 
 @media(min-width:620px){.wedding-site{margin-block:24px;border-radius:3px}.main-hero{min-height:820px}.story-section,.details-section,.timeline-section,.rsvp-section-new{padding-inline:54px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.opening-art,.petal-drift i{animation:none}}
+
+@media(min-width:900px){
+  body{background:linear-gradient(135deg,#efe5df,#dcc8c5)}
+  .wedding-site{width:min(calc(100% - 48px),1180px);margin:24px auto;border-radius:18px;box-shadow:0 28px 90px #49202b2c}
+  nav{grid-template-columns:120px 120px 1fr 120px 120px;min-height:68px;padding:0 42px}
+  nav a{font-size:.62rem}.monogram{font-size:1.55rem!important}
+  .main-hero{min-height:700px;display:block;background:linear-gradient(90deg,#fff9f3 0 50%,#6c0b29 50% 100%)}
+  .hero-art{inset:54px auto 54px 4%;width:48%;height:auto;align-items:center}
+  .hero-art img{width:100%;height:100%;max-height:590px;object-fit:cover;border-radius:48% 48% 18px 18px;box-shadow:0 28px 60px #5e243136}
+  .hero-art:before,.hero-art:after{display:none}
+  .hero-copy{position:absolute;top:50%;right:0;width:50%;padding:20px 55px;transform:translateY(-50%)}
+  .hero-copy h1{font-size:5.6rem}.hero-copy h2{font-size:1.12rem}.hero-copy .micro-label{font-size:.68rem}
+  .story-section{padding:100px 10%}.story-section blockquote{max-width:690px;font-size:1.7rem}.story-section>.script-title{font-size:5.8rem}.story-section h3{font-size:4.2rem}.families{grid-template-columns:1fr auto 1fr;align-items:center;max-width:760px;margin:30px auto;font-size:1.2rem}.families i{padding:0 24px}
+  .details-section{padding:95px 7%}.details-intro h2{font-size:3.2rem}.details-grid{grid-template-columns:repeat(3,1fr);gap:18px}.details-grid article{min-height:205px;padding:66px 26px 28px}.details-grid article>span{top:24px;left:26px;font-size:1.35rem}.details-grid h3{font-size:1.5rem}.details-grid small{font-size:.74rem}.joy-note{margin-top:52px!important;font-size:1.25rem!important}
+  .timeline-section{padding:95px 9%}.timeline-section>h2{font-size:3.1rem}.timeline{max-width:720px;margin:0 auto}.timeline article{grid-template-columns:80px 30px 1fr;min-height:105px}.timeline time{font-size:1.08rem}.timeline h3{font-size:1.48rem}.timeline p{font-size:.78rem}
+  .rsvp-section-new{padding:95px 18%}.rsvp-section-new>.script-title{font-size:5.5rem}.rsvp-section-new form{grid-template-columns:1fr 1fr;gap:18px;max-width:760px;margin:36px auto 0}.rsvp-section-new form label:nth-of-type(3),.rsvp-section-new .send-response,.rsvp-section-new .form-message{grid-column:1/-1}.rsvp-section-new input{min-height:56px}.send-response{max-width:380px;width:100%;margin:6px auto 0}
+  .countdown-section{padding:95px 12%;background-position:center 34%}.countdown-section h2{font-size:4.5rem}.countdown{max-width:670px;margin:0 auto;gap:14px}.countdown div{padding:22px 8px}.countdown strong{font-size:2.2rem}.countdown-section blockquote{font-size:1.3rem}
+}
+
+@media(min-width:1300px){.opening-content h1{font-size:7rem}.opening-content{max-width:650px}.opening-content button{min-height:56px;padding-inline:34px}.wedding-site{width:1180px}}
