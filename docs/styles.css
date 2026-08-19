@@ -38,3 +38,34 @@ section{position:relative}.section-kicker{margin:0;color:#927178;font-size:.61re
 }
 
 @media(min-width:1300px){.opening-content h1{font-size:7rem}.opening-content{max-width:650px}.opening-content button{min-height:56px;padding-inline:34px}.wedding-site{width:1180px}}
+
+/* Light ivory, burgundy silk and champagne-gold theme */
+:root{--wine:#7a1830;--berry:#9c2e49;--rose:#e7b8b8;--blush:#f4e5de;--ivory:#fffaf1;--sage:#7a8a70;--gold:#b99664;--ink:#4b3537;--muted:#8a7475}
+body{background:radial-gradient(circle at 12% 8%,#fffaf2 0 5%,transparent 26%),linear-gradient(135deg,#eee2d7,#dfcec5)}
+.wedding-site{background:#fffaf1}
+.opening-screen{background:linear-gradient(145deg,#f3e7dc,#e2cec5)}
+.opening-art{opacity:.27;filter:sepia(.18) saturate(.72)}
+.opening-art:after{background:linear-gradient(#fff8ef88,#f1ded4c7 50%,#d9bfc0db)}
+.opening-shade{inset:14px;border-color:#9f785d66}
+.opening-content{width:min(88%,560px);padding:52px 26px 38px;border:1px solid #b9976e;border-radius:220px 220px 24px 24px;color:var(--ink);background:#fffaf1e8;box-shadow:0 24px 70px #6f38402a,0 0 0 7px #fffaf173;backdrop-filter:blur(8px)}
+.opening-content:before{content:"S  •  G";display:grid;place-items:center;width:54px;height:54px;margin:-78px auto 20px;border:1px solid #9a693f;border-radius:50%;color:#6f452a;background:linear-gradient(145deg,#e8c894,#b18453);box-shadow:0 7px 18px #7853373d;font-family:'Cormorant Garamond',serif;font-size:.78rem;font-weight:600;letter-spacing:.12em}
+.opening-content .micro-label{color:#8a6c6d}.opening-content h1{color:var(--wine);text-shadow:none}.opening-content button{border-color:var(--wine);color:#fff;background:linear-gradient(120deg,#691328,#96304a);box-shadow:0 12px 30px #7b1c342b}
+nav{background:#781a32eb;border-bottom:1px solid #d5a7a4}
+.story-section{background:linear-gradient(#fffdf8,#fcf4ec);box-shadow:inset 0 0 0 1px #d8bf9e55}
+.details-section{padding-bottom:132px;color:var(--ink);background:linear-gradient(155deg,#fffaf2,#f6e9df 62%,#eedbd3)}
+.details-section:before{opacity:.3;background:radial-gradient(circle at 15% 20%,#b98b72 0 1px,transparent 1.4px);background-size:11px 11px}
+.details-section:after{content:"";position:absolute;z-index:1;right:-5%;bottom:-18px;left:-5%;height:100px;background:linear-gradient(172deg,transparent 0 24%,#a4475f99 25% 40%,#75172f 41% 61%,#a4475fcc 62% 74%,transparent 75%),linear-gradient(188deg,transparent 0 35%,#5f1028 36% 58%,#8b2942 59% 71%,transparent 72%);filter:drop-shadow(0 10px 12px #5b263533);pointer-events:none}
+.details-intro,.details-grid,.joy-note{position:relative;z-index:2}.details-intro .section-kicker{color:var(--wine)}.details-intro h2{color:var(--ink)}.details-intro h2 em{color:var(--wine)}
+.details-grid article{border-color:#c5a47780;background:#fffdf8d9;box-shadow:0 12px 28px #78534910}.details-grid article>span{color:var(--wine)}.details-grid p{color:#9a5d66}.details-grid h3{color:var(--ink)}.details-grid small{color:var(--muted)}.details-grid a{color:var(--wine)}.joy-note{color:var(--ink)!important}
+.timeline-section{background:linear-gradient(145deg,#fffaf3,#f6e8df)}.timeline article>span:before{background:#fffaf3}
+.rsvp-section-new{background:#fffdf8;box-shadow:inset 0 0 0 1px #d8bf9e4d}.rsvp-section-new input{border-color:#d8c2ab;background:#fffaf5}.send-response{background:linear-gradient(120deg,#71152e,#a23a54)}
+.countdown-section{overflow:hidden;padding-bottom:112px;color:var(--ink);background:linear-gradient(#fff9f1e8,#f6e7dfe8),url('./couple-portrait.png') center 34%/cover}
+.countdown-section:after{content:"";position:absolute;right:-5%;bottom:-24px;left:-5%;height:92px;background:linear-gradient(170deg,transparent 0 25%,#a14a6088 26% 40%,#72142e 41% 62%,#a64b63c7 63% 74%,transparent 75%),linear-gradient(190deg,transparent 0 32%,#5f1028 33% 57%,#8b2942 58% 70%,transparent 71%);filter:drop-shadow(0 -7px 12px #6d2e3b29)}
+.countdown-section>*{position:relative;z-index:2}.countdown-section .section-kicker{color:var(--wine)}.countdown div{border-color:#bc996c8a;background:#fffaf1bd;box-shadow:0 10px 28px #815b4812}.countdown strong{color:var(--wine)}.countdown-section blockquote{color:var(--ink)}
+
+@media(min-width:900px){
+  .main-hero{background:linear-gradient(90deg,#fffaf3 0 50%,#f1dfd7 50% 100%)}
+  .hero-copy{color:var(--ink)}.hero-copy h1{color:var(--wine);text-shadow:none}.hero-copy .micro-label{color:#956e70}.hero-date b{color:var(--wine)}
+  .details-section{padding-bottom:150px}.opening-content{padding-inline:52px}
+  .countdown-section{background:linear-gradient(#fff9f1e9,#f2dfd6e9),url('./couple-portrait.png') center 36%/cover}
+}
