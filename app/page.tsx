@@ -82,7 +82,7 @@ export default function Home() {
           <div className="details-grid">
             <article><span>01</span><p>Date</p><h3>Monday, 7th September</h3><small>The year two thousand twenty-six</small></article>
             <article><span>02</span><p>Time</p><h3>09:00 AM — 04:30 PM</h3><small>A day of love and celebration</small></article>
-            <article><span>03</span><p>Venue</p><h3>Nethmi Reception Hall</h3><small>No. 59/1, Karandagolla Road, Dikwella</small><a href="https://www.google.com/maps/search/?api=1&query=Nethmi+Reception+Hall+Dikwella" target="_blank" rel="noreferrer">View map ↗</a></article>
+            <article><span>03</span><p>Venue</p><h3>Nethmi Reception Hall</h3><small>Divulapitiya, Sri Lanka</small><a href="https://www.google.com/maps/search/?api=1&query=Nethmi+Reception+Hall+Divulapitiya" target="_blank" rel="noreferrer">View map ↗</a></article>
           </div>
           <p className="joy-note">We joyfully invite you to celebrate the beginning of our forever together.</p>
         </section>
