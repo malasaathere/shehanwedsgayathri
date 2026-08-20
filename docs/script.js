@@ -1,4 +1,4 @@
-const GOOGLE_SCRIPT_URL = "";
+const GOOGLE_SCRIPT_URL = window.WEDDING_CONFIG?.googleScriptUrl || "";
 const weddingDate = new Date("2026-09-07T09:00:00+05:30").getTime();
 
 let openingStarted = false;

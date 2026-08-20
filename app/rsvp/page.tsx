@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 type FormState = "idle" | "sending" | "success" | "error" | "setup";
+const googleScriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_WEB_APP_URL ?? "";
 
 function PetalFlower({ className = "" }: { className?: string }) {
   return <span className={`bloom ${className}`} aria-hidden="true">{Array.from({ length: 7 }, (_, i) => <i key={i} style={{ "--i": i } as React.CSSProperties} />)}<b /></span>;
@@ -18,13 +19,12 @@ export default function RsvpPage() {
     setState("sending");
     const form = event.currentTarget;
     try {
-      const response = await fetch("/api/rsvp", { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify(Object.fromEntries(new FormData(form))) });
-      const result = await response.json() as { message?: string; needsSetup?: boolean };
-      if (!response.ok) {
-        setState(result.needsSetup ? "setup" : "error");
-        setMessage(result.message || "කරුණාකර නැවත උත්සාහ කරන්න.");
+      if (!googleScriptUrl) {
+        setState("setup");
+        setMessage("Google Sheet සම්බන්ධතාවය තවම සකසා නැත.");
         return;
       }
+      await fetch(googleScriptUrl, { method:"POST", mode:"no-cors", headers:{ "Content-Type":"text/plain;charset=utf-8" }, body:JSON.stringify(Object.fromEntries(new FormData(form))) });
       form.reset(); setState("success"); setMessage("ඔබගේ පැමිණීම සාර්ථකව තහවුරු විය.");
     } catch {
       setState("error"); setMessage("සම්බන්ධතාවයේ ගැටලුවක් ඇත. කරුණාකර නැවත උත්සාහ කරන්න.");

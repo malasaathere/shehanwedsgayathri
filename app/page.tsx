@@ -3,6 +3,7 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 
 const weddingDate = new Date("2026-09-07T09:00:00+05:30").getTime();
+const googleScriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_WEB_APP_URL ?? "";
 
 function Bloom({ className = "" }: { className?: string }) {
   return <span className={`bloom ${className}`} aria-hidden="true">{Array.from({ length: 7 }, (_, i) => <i key={i} style={{ "--i": i } as React.CSSProperties} />)}<b /></span>;
@@ -58,9 +59,8 @@ export default function Home() {
   async function submitRsvp(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setStatus("sending"); setMessage(""); const form = event.currentTarget;
     try {
-      const response = await fetch("/api/rsvp", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
-      const result = await response.json() as { message?: string; needsSetup?: boolean };
-      if (!response.ok) { setStatus(result.needsSetup ? "setup" : "error"); setMessage(result.message || "Please try again."); return; }
+      if (!googleScriptUrl) { setStatus("setup"); setMessage("The Google Sheet connection still needs to be configured."); return; }
+      await fetch(googleScriptUrl, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
       form.reset(); setStatus("success"); setMessage("Your place is saved. We cannot wait to celebrate with you!");
     } catch { setStatus("error"); setMessage("We could not reach the guest list. Please try again."); }
   }
@@ -128,18 +128,19 @@ export default function Home() {
           <div className="details-grid">
             <article><span>01</span><p>Date</p><h3>Monday, 7th September</h3><small>The year two thousand twenty-six</small></article>
             <article><span>02</span><p>Time</p><h3>09:00 AM — 04:30 PM</h3><small>A day of love and celebration</small></article>
-            <article><span>03</span><p>Venue</p><h3>Nethmi Reception Hall</h3><small>Divulapitiya, Sri Lanka</small><a href="https://www.google.com/maps/search/?api=1&query=Nethmi+Reception+Hall+Divulapitiya" target="_blank" rel="noreferrer">View map ↗</a></article>
+            <article><span>03</span><p>Venue</p><h3>Nethmi Reception Hall</h3><small>Divulapitiya, Sri Lanka</small><a href="https://www.google.com/maps/dir/?api=1&destination=Nethmi+Reception+Hall%2C+Divulapitiya%2C+Sri+Lanka" target="_blank" rel="noreferrer">Get directions ↗</a></article>
           </div>
+          <div className="venue-map"><iframe title="Map to Nethmi Reception Hall, Divulapitiya" src="https://www.google.com/maps?q=Nethmi%20Reception%20Hall%2C%20Divulapitiya%2C%20Sri%20Lanka&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div>
           <p className="joy-note">We joyfully invite you to celebrate the beginning of our forever together.</p>
         </section>
 
         <section className="timeline-section" id="nakath">
           <p className="section-kicker">Auspicious moments</p><h2>Wedding Day <em>Nakath</em></h2>
           <div className="timeline">
-            <article><time>09:00 <small>AM</small></time><span /><div><h3>Guests Arrive</h3><p>A warm welcome to our family and friends</p></div></article>
-            <article><time>10:06 <small>AM</small></time><span /><div><h3>Engagement Ceremony</h3><p>The couple exchanges rings and promises</p></div></article>
-            <article><time>10:26 <small>AM</small></time><span /><div><h3>Poruwa Ceremony</h3><p>Traditional blessings and sacred rituals</p></div></article>
-            <article><time>04:02 <small>PM</small></time><span /><div><h3>Couple’s Departure</h3><p>The newlyweds begin their journey together</p></div></article>
+            <article><time>09:00 <small>AM</small></time><span /><div><h3>Guests Arrive</h3><p>Please arrive and be seated before the ceremony begins</p></div></article>
+            <article><time>10:06 <small>AM</small></time><span /><div><h3>Engagement Ceremony</h3><p>The engagement ceremony begins with blessings and joy</p></div></article>
+            <article><time>10:26 <small>AM</small></time><span /><div><h3>Poruwa Ceremony</h3><p>The sacred poruwa ceremony follows in tradition</p></div></article>
+            <article><time>04:02 <small>PM</small></time><span /><div><h3>Couple’s Departure</h3><p>Shehan and Gayathri leave together as husband and wife</p></div></article>
           </div>
         </section>
 

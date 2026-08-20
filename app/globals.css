@@ -116,3 +116,5 @@ body.invitation-locked,body:has(.opening-screen:not(.is-open)){overflow:hidden}
 @keyframes scroll-dot{0%{opacity:0;transform:translate(-50%,-1px)}35%{opacity:1}100%{opacity:0;transform:translate(-50%,10px)}}
 @media(prefers-reduced-motion:reduce){.seal-hint span,.seal-hint i:before{animation:none}}
 .timeline time small{display:block;margin-top:2px;font-family:Poppins,sans-serif;font-size:.48em;font-weight:600;letter-spacing:.16em}
+.venue-map{position:relative;z-index:2;height:260px;margin:24px 0 0;overflow:hidden;border:1px solid #c5a47780;border-radius:18px;background:#eadfd5;box-shadow:0 16px 38px #6b3d4718}.venue-map iframe{display:block;width:100%;height:100%;border:0;filter:saturate(.75) sepia(.08)}
+@media(min-width:900px){.venue-map{height:340px;margin-top:28px}}
