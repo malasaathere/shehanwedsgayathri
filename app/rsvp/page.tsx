@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import type { CSSProperties, FormEvent } from "react";
 import { useState } from "react";
 
 type FormState = "idle" | "sending" | "success" | "error" | "setup";
-const googleScriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_WEB_APP_URL ?? "";
+const googleScriptUrl = import.meta.env.VITE_GOOGLE_SHEETS_WEB_APP_URL ?? "";
 
 function PetalFlower({ className = "" }: { className?: string }) {
   return (
@@ -43,7 +42,7 @@ export default function RsvpPage() {
     <main className="rsvp-page">
       <div className="floating-petals" aria-hidden="true"><i /><i /><i /><i /><i /></div>
       <header className="rsvp-header">
-        <Link href="/" className="back-link" aria-label="ආරාධනා පත්‍රයට ආපසු යන්න">←</Link>
+        <a href="/" className="back-link" aria-label="ආරාධනා පත්‍රයට ආපසු යන්න">←</a>
         <p>මේඝවන් <span>♡</span> ගයත්‍රි</p>
         <span className="header-spacer" />
       </header>
@@ -62,7 +61,7 @@ export default function RsvpPage() {
             <p className="overline">ස්තුතියි!</p>
             <h2>ඔබව පිළිගැනීමට<br />අපි සූදානම්</h2>
             <p>{message}</p>
-            <Link className="home-button" href="/">ආරාධනා පත්‍රය බලන්න</Link>
+            <a className="home-button" href="/">ආරාධනා පත්‍රය බලන්න</a>
           </div>
         ) : (
           <>
