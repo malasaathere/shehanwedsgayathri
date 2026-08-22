@@ -1,11 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import type { CSSProperties, FormEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const weddingDate = new Date("2026-09-07T09:00:00+05:30").getTime();
-const googleScriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_WEB_APP_URL ?? "";
+const googleScriptUrl = import.meta.env.VITE_GOOGLE_SHEETS_WEB_APP_URL ?? "";
 
 function Bloom({ className = "" }: { className?: string }) {
   return (
@@ -21,12 +20,9 @@ function Bloom({ className = "" }: { className?: string }) {
 function CoupleArt({ className = "" }: { className?: string }) {
   return (
     <div className={`couple-art ${className}`}>
-      <Image
+      <img
         src="/couple-portrait.png"
         alt="Shehan and Gayathri in wedding attire surrounded by burgundy and blush flowers"
-        width={763}
-        height={1024}
-        priority
       />
     </div>
   );
