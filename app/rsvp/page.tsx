@@ -1,13 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import type { CSSProperties, FormEvent } from "react";
+import { useState } from "react";
 
 type FormState = "idle" | "sending" | "success" | "error" | "setup";
 const googleScriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_WEB_APP_URL ?? "";
 
 function PetalFlower({ className = "" }: { className?: string }) {
-  return <span className={`bloom ${className}`} aria-hidden="true">{Array.from({ length: 7 }, (_, i) => <i key={i} style={{ "--i": i } as React.CSSProperties} />)}<b /></span>;
+  return (
+    <span className={`bloom ${className}`} aria-hidden="true">
+      {Array.from({ length: 7 }, (_, i) => (
+        <i key={i} style={{ "--i": i } as CSSProperties} />
+      ))}
+      <b />
+    </span>
+  );
 }
 
 export default function RsvpPage() {
