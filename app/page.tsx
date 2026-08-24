@@ -5,7 +5,8 @@ import type { CSSProperties, FormEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const weddingDate = new Date("2026-09-07T09:00:00+05:30").getTime();
-const googleScriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_WEB_APP_URL ?? "";
+const googleScriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_WEB_APP_URL ??
+  "https://script.google.com/macros/s/AKfycbzX4WcF6HvYkNMBMMojOkMZt9GZmiMdm3-60qXiRu_omagWfYVWL4g5R73yKzvs4Szt/exec";
 
 function Bloom({ className = "" }: { className?: string }) {
   return (
@@ -22,12 +23,15 @@ function CoupleArt({ className = "" }: { className?: string }) {
   return (
     <div className={`couple-art ${className}`}>
       <Image
-        src="/couple-portrait.png"
+        className="hero-couple-image"
+        src="/couple-portrait-cutout.png"
         alt="Shehan and Gayathri in wedding attire surrounded by burgundy and blush flowers"
         width={763}
         height={1024}
         priority
       />
+      <img className="hero-botanical hero-botanical-left" src="/floral-edge.png" alt="" aria-hidden="true" />
+      <img className="hero-botanical hero-botanical-right" src="/floral-edge.png" alt="" aria-hidden="true" />
     </div>
   );
 }
@@ -284,23 +288,17 @@ export default function Home() {
 
     setOpening(true);
 
-    // Animation sequence:
-    // 0.00s – 0.40s  wax seal release
-    // 0.15s – 1.00s  flap opening backward
-    // 0.85s – 2.05s  invitation card rises smoothly out of pocket
-    // 2.05s – 2.20s  brief pause showing the risen invitation
-    // 2.20s – 2.90s  envelope softly fades/scales back
-    // 2.40s – 3.20s  main website smoothly reveals
+    // Reveal the full artwork, hold it for reading, then crossfade into the site.
     window.setTimeout(() => {
       setOpened(true);
-    }, 3200);
+    }, 4300);
 
     window.setTimeout(() => {
       document.getElementById("home")?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
-    }, 3300);
+    }, 4400);
   }, []);
 
   useEffect(() => {
@@ -461,10 +459,19 @@ export default function Home() {
             <i />
             <i />
             <i />
+            <i />
+            <i />
+            <i />
+            <i />
           </div>
           <CoupleArt className="hero-art" />
           <div className="hero-copy">
-            <p className="micro-label">We invite you to attend</p>
+            <div className="invitation-whisper" aria-label="We invite you to attend">
+              <span />
+              <p>We invite you</p>
+              <i>to attend</i>
+              <span />
+            </div>
             <h2>The wedding of</h2>
             <h1>
               <span>Shehan</span>
@@ -479,6 +486,7 @@ export default function Home() {
         </section>
 
         <section className="story-section reveal-on-scroll" id="story">
+          <img className="section-flower section-flower-left" src="/floral-edge.png" alt="" aria-hidden="true" />
           <p className="section-kicker">The bride &amp; groom</p>
           <blockquote>
             “Together with love in our hearts and the blessings of our families, we invite you to share in the joy of our wedding celebration.”
@@ -543,6 +551,7 @@ export default function Home() {
         </section>
 
         <section className="timeline-section reveal-on-scroll" id="nakath">
+          <img className="section-flower section-flower-right" src="/floral-edge.png" alt="" aria-hidden="true" />
           <p className="section-kicker">Auspicious moments</p>
           <h2>
             Wedding Day <em>Nakath</em>
@@ -592,8 +601,8 @@ export default function Home() {
         </section>
 
         <section className="rsvp-section-new reveal-on-scroll" id="rsvp">
-          <Bloom className="rsvp-bloom-left" />
-          <Bloom className="rsvp-bloom-right" />
+          <img className="rsvp-flower rsvp-flower-left" src="/floral-edge.png" alt="" aria-hidden="true" />
+          <img className="rsvp-flower rsvp-flower-right" src="/floral-edge.png" alt="" aria-hidden="true" />
           <p className="section-kicker">Kindly respond</p>
           <h2 className="script-title">RSVP</h2>
           <p>We would be honoured by your presence</p>

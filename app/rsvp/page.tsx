@@ -5,7 +5,8 @@ import type { CSSProperties, FormEvent } from "react";
 import { useState } from "react";
 
 type FormState = "idle" | "sending" | "success" | "error" | "setup";
-const googleScriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_WEB_APP_URL ?? "";
+const googleScriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_WEB_APP_URL ??
+  "https://script.google.com/macros/s/AKfycbzX4WcF6HvYkNMBMMojOkMZt9GZmiMdm3-60qXiRu_omagWfYVWL4g5R73yKzvs4Szt/exec";
 
 function PetalFlower({ className = "" }: { className?: string }) {
   return (
